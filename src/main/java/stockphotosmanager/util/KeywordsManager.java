@@ -34,7 +34,7 @@ public class KeywordsManager {
 		        .build();
 	}
 	
-	private void getKeywords() {
+	public void getKeywords() {
 		
 		S3Object s3Object = new S3Object()
 				.withBucket("qqtest20190613")//TODO
