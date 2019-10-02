@@ -17,6 +17,10 @@ public class KeywordsManager {
 	
 	private AmazonRekognition awsRekognition;
 
+	public KeywordsManager(AmazonRekognition awsRekognition) throws Exception {
+		this.awsRekognition = awsRekognition;
+	}
+	/*
 	public KeywordsManager() throws Exception {
 		//read credentials from env variables
 		String access_key = System.getenv("QQ_AWS_ACCESS_KEY");
@@ -33,8 +37,9 @@ public class KeywordsManager {
 		        .withRegion("eu-west-1")
 		        .build();
 	}
+	*/
 	
-	public void getKeywords() {
+	public List<Label> getKeywords() {
 		
 		S3Object s3Object = new S3Object()
 				.withBucket("qqtest20190613")//TODO
@@ -56,7 +61,9 @@ public class KeywordsManager {
 		
 		List<Label> labels = detectLabelsResult.getLabels();
 		
-		System.err.println("[KeywordsManager - DetectLabels]labels: " + labels);
+		return labels;
+		
+		//System.err.println("[KeywordsManager - DetectLabels]labels: " + labels);
 		
 		/*
 		for (Label label : labels) {
@@ -65,14 +72,32 @@ public class KeywordsManager {
 		*/
 	}
 	
+	/*
 	public static void main(String[] args) {
 		try {
-			KeywordsManager keywordsManager = new KeywordsManager();
-			keywordsManager.getKeywords();
+			String access_key = System.getenv("QQ_AWS_ACCESS_KEY");
+			String secret_key = System.getenv("QQ_AWS_SECRET_KEY");
+			System.err.println("[KeywordsManager - constructor]access_key: " + access_key);
+			System.err.println("[KeywordsManager - constructor]secret_key: " + secret_key);
+			if (access_key ==  null || secret_key == null) {
+				throw new Exception("Unable to get credentials from env variables");
+			}
+			AWSCredentials userCredentials = new BasicAWSCredentials(access_key, secret_key);
+			AmazonRekognition  awsRekognition = AmazonRekognitionClientBuilder
+			        .standard()
+			        .withCredentials(new AWSStaticCredentialsProvider(userCredentials))
+			        .withRegion("eu-west-1")
+			        .build();
+
+			
+			KeywordsManager keywordsManager = new KeywordsManager(awsRekognition);
+			List<Label> labels = keywordsManager.getKeywords();
+			System.err.println("[KeywordsManager - main]labels: " + labels);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	*/
 
 }
 

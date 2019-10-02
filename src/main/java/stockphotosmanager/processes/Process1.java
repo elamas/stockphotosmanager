@@ -12,8 +12,8 @@ public class Process1 implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		try {
-			KeywordsManager keywordsManager = new KeywordsManager();
-			keywordsManager.getKeywords();
+//			KeywordsManager keywordsManager = new KeywordsManager();
+//			keywordsManager.getKeywords();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
