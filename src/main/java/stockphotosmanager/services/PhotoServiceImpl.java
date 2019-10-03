@@ -16,6 +16,7 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Override
 	public List<Photo> findAll() {
+		System.err.println("[PhotoServiceImpl - findAll]");
 		return this.photoRepository.findAll();
 	}
 
