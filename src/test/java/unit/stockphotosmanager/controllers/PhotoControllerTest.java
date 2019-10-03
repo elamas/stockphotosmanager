@@ -1,4 +1,4 @@
-package stockphotosmanager.controllers;
+package unit.stockphotosmanager.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import stockphotosmanager.controllers.PhotoController;
 import stockphotosmanager.models.Photo;
 import stockphotosmanager.services.PhotoService;
 

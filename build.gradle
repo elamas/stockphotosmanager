@@ -21,3 +21,70 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile group: 'com.amazonaws', name: 'aws-java-sdk-rekognition', version: '1.11.569'
 }
+
+test {
+	//para que me muestre resumen del numero de test lanzados, existosos y demas
+  testLogging {
+    afterSuite { desc, result ->
+      if (!desc.parent) { // will match the outermost suite
+        println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+      }
+    }
+  }
+  
+    filter {
+    	//if (testsType != null) {
+    	if (project.properties['testsType'] != null && project.properties['testsType'].equals("integration")) {
+    		System.err.println("+++++++++ [build.gradle]testsType: " + testsType);
+    		System.err.println("+++++++++ Lanzando tests de integracion");
+    		includeTestsMatching "integration.*"
+    	} else {
+    		System.err.println("+++++++++ [build.gradle]testsType not defined");
+    		System.err.println("+++++++++ Lanzando tests unitarios");
+    		includeTestsMatching "unit.*"
+    	}
+    	
+    	//System.err.println("+++++++++ [build.gradle]getIncludePatterns(): " + getIncludePatterns());
+    	/*
+    	System.err.println("+++++++++ System.properties begin +++++++++++");
+        //for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+          //  System.out.println(entry.getKey() + " : " + entry.getValue());
+        //}
+
+		Properties p = System.getProperties();
+		Enumeration keys = p.keys();
+		while (keys.hasMoreElements()) {
+		    String key = (String)keys.nextElement();
+		    String value = (String)p.get(key);
+		    System.out.println(key + ": " + value);
+		}
+        System.err.println("+++++++++ System.properties ebd +++++++++++");
+        */
+            	
+        //include all tests from package
+        //includeTestsMatching "unit.*"
+    }
+
+}
+
+/*
+test {
+    testLogging {
+        // Make sure output from
+        // standard out or error is shown
+        // in Gradle output.
+        showStandardStreams = true
+ 
+        // Or we use events method:
+        // events 'standard_out', 'standard_error'
+ 
+        // Or set property events:
+        // events = ['standard_out', 'standard_error']
+ 
+        // Instead of string values we can
+        // use enum values:
+        // events org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT,
+        //        org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR,
+    }
+}
+*/

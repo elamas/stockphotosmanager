@@ -1,4 +1,4 @@
-package stockphotosmanager.util;
+package unit.stockphotosmanager.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.model.Label;
+
+import stockphotosmanager.util.KeywordsManager;
+
 import com.amazonaws.services.rekognition.model.DetectLabelsRequest;
 import com.amazonaws.services.rekognition.model.DetectLabelsResult;
 

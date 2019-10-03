@@ -1,6 +1,9 @@
-package stockphotosmanager.models;
+package unit.stockphotosmanager.models;
 
 import org.junit.Test;
+
+import stockphotosmanager.models.Photo;
+
 import static org.junit.Assert.*;
 
 public class PhotoTest {
