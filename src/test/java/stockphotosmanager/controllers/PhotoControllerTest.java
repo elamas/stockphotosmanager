@@ -1,4 +1,7 @@
-package stockphotosmanager.services;
+package stockphotosmanager.controllers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,33 +11,29 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import stockphotosmanager.repositories.PhotoRepository;
 import stockphotosmanager.models.Photo;
+import stockphotosmanager.services.PhotoService;
 
 import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-public class PhotoServiceImplTest {
+public class PhotoControllerTest {
 	
     @TestConfiguration
-    static class PhotoServiceImplTestContextConfiguration {
+    static class PhotoControllerTestContextConfiguration {
   
         @Bean
-        public PhotoService photoService() {
-            return new PhotoServiceImpl();
+        public PhotoController photoController() {
+            return new PhotoController();
         }
     }
 	
 	@MockBean
-	private PhotoRepository photoRepository;
+	private PhotoService photoService;
 	
 	@Autowired
-	private PhotoService photoService;
+	private PhotoController photoController;
 	
 	@Test
 	public void findAllTest() {
@@ -43,10 +42,10 @@ public class PhotoServiceImplTest {
 		Photo photo1 = new Photo();
 		photo1.setDvd("dvd1");
 		photos.add(photo1);
-		when(photoRepository.findAll()).thenReturn(photos);
+		when(photoService.findAll()).thenReturn(photos);
 		//mock end
 		
-		List<Photo> photosReturned = photoService.findAll();
+		List<Photo> photosReturned = photoController.findAll();
 		assertEquals(photos, photosReturned);
 	}
 
