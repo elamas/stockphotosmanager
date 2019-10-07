@@ -1,5 +1,6 @@
 package integration.stockphotosmanager.models;
 
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -19,17 +20,20 @@ import javax.persistence.PersistenceException;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-//@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE) //necesaria si quiero probar contra mysql
+@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE) //necesaria si quiero probar contra mysql
 //@Transactional(propagation = Propagation.NOT_SUPPORTED)
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = StockphotosmanagerApplication.class)
 @ContextConfiguration(classes=StockphotosmanagerApplication.class)
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
+//@Sql("/tables.sql")
+//@SqlMergeMode(MERGE)
 public class PhotoTest {
 	
 	@Autowired
@@ -38,7 +42,14 @@ public class PhotoTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
+	@BeforeClass
+	//@Sql("/tables.sql")
+	public static void createTables() {
+		System.err.println("***************************** createTables");
+	}
+	
 	@Test
+	//@Sql("/insert.sql")
 	public void saveTest() {
 		Photo photo = new Photo();
 		photo.setDvd("dvdtest");
@@ -50,7 +61,6 @@ public class PhotoTest {
 		Photo savedPhoto = this.entityManager.persistAndFlush(photo);
 		//Photo savedPhoto = this.entityManager.persist(photo);
 		assertEquals(savedPhoto.getDvd(), photo.getDvd());
-		
 	}
 	
 	/*

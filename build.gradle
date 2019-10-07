@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.1.8.RELEASE'
+	id 'org.springframework.boot' version '2.1.9.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 	id "org.sonarqube" version "2.7"
@@ -21,7 +21,8 @@ dependencies {
 	compile group: 'com.amazonaws', name: 'aws-java-sdk-rekognition', version: '1.11.569'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testCompile group: 'com.h2database', name: 'h2', version: '1.4.199'
+	//testCompile group: 'com.h2database', name: 'h2', version: '1.4.199'
+	//compile group: 'com.h2database', name: 'h2', version: '1.4.199'
 }
 
 test {
