@@ -35,7 +35,7 @@ public class PhotoControllerTestWithTestRestTemplate {
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
 		//no testeo con json path por no perder tiempo
 		System.err.println("**************** [PhotoControllerTestWithTestRestTemplate - findAllTest] response.getBody(): " + response.getBody());
-		assertTrue(response.getBody().indexOf("gfdgdfg") != -1);
+		assertTrue(response.getBody().indexOf("amano") != -1);
 		
 		//jsonPath("$", hasSize(1))
 	    //assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
