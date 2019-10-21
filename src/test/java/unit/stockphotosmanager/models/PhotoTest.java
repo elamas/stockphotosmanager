@@ -3,8 +3,14 @@ package unit.stockphotosmanager.models;
 import org.junit.Test;
 
 import stockphotosmanager.models.Photo;
+import stockphotosmanager.models.PhotoSite;
+import stockphotosmanager.models.PhotoSiteKey;
+import stockphotosmanager.models.Site;
 
 import static org.junit.Assert.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class PhotoTest {
 	
@@ -63,4 +69,33 @@ public class PhotoTest {
 		photo.setComments(comments);
 		assertEquals(comments, photo.getComments());
 	}
+	
+	@Test
+	public void photoSitesTest() {
+		PhotoSite photoSite = new PhotoSite();
+		photoSite.setComments("lala");
+		
+		PhotoSiteKey id = new PhotoSiteKey();
+		id.setPhotoId(100);
+		id.setSiteId(200);
+		photoSite.setId(id);
+
+		photoSite.setLastRevisionDateMillis(1111);
+		photoSite.setLastRevisionDateStringMadrid("1111");
+		
+//		photoSite.setPhoto(photo);
+//		photoSite.setSite(site);
+		
+		photoSite.setStatus(33);
+		photoSite.setUploadDateMillis(1111);
+		photoSite.setUploadDateStringMadrid("1111");
+		
+		Set<PhotoSite> photoSites = new HashSet<PhotoSite>();
+		photoSites.add(photoSite);
+		
+		Photo photo = new Photo();
+		photo.setPhotoSites(photoSites);
+		assertEquals(photoSites, photo.getPhotoSites());
+	}
+
 }

@@ -1,10 +1,13 @@
 package stockphotosmanager.models;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +33,9 @@ public class Photo {
 
 	@Column(name = "pho_comments")
 	private String comments;
+	
+    @OneToMany(mappedBy = "photo")//parece que aqui hay que poner una entidad, aunque sea con minusculas, no una tabla
+    Set<PhotoSite> photoSites;
 
 	public Integer getId() {
 		return id;
@@ -79,5 +85,13 @@ public class Photo {
 		this.comments = comments;
 	}
 
-	
+	public Set<PhotoSite> getPhotoSites() {
+		return photoSites;
+	}
+
+	public void setPhotoSites(Set<PhotoSite> photoSites) {
+		this.photoSites = photoSites;
+	}
+
+
 }

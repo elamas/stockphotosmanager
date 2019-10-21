@@ -1,10 +1,13 @@
 package stockphotosmanager.models;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +27,9 @@ public class Site {
 	
 	@Column(name = "sit_num_categories")
 	private int numCategories;
+	
+    @OneToMany(mappedBy = "site")
+    Set<PhotoSite> photoSites;
 
 	public Integer getId() {
 		return id;
@@ -56,6 +62,14 @@ public class Site {
 	public void setNumCategories(int numCategories) {
 		this.numCategories = numCategories;
 	}
-	
+
+	public Set<PhotoSite> getPhotoSites() {
+		return photoSites;
+	}
+
+	public void setPhotoSites(Set<PhotoSite> photoSites) {
+		this.photoSites = photoSites;
+	}
+
 	
 }
