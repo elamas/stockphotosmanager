@@ -20,4 +20,16 @@ public class PhotoServiceImpl implements PhotoService {
 		return this.photoRepository.findAll();
 	}
 
+	@Override
+	public void processPhoto(String bucketName, String keyNormalized) {
+		System.err.println("[PhotoServiceImpl - processPhoto]bucketName: " + bucketName);
+		System.err.println("[PhotoServiceImpl - processPhoto]keyNormalized: " + keyNormalized);
+		//llama al KeywordManager para obtener las keywords
+		//TODO
+		//inserta en bbdd la photo
+		//TODO
+		//genera un thumb
+		//TODO
+	}
+
 }

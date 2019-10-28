@@ -17,12 +17,21 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'mysql:mysql-connector-java'
+	//runtimeOnly 'mysql:mysql-connector-java'
+	//para que me funcione en la lamnda
+	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
 	compile group: 'com.amazonaws', name: 'aws-java-sdk-rekognition', version: '1.11.569'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//testCompile group: 'com.h2database', name: 'h2', version: '1.4.199'
 	//compile group: 'com.h2database', name: 'h2', version: '1.4.199'
+	
+	compile group: 'com.amazonaws', name: 'aws-lambda-java-core', version: '1.2.0'
+	compile group: 'com.amazonaws', name: 'aws-lambda-java-events', version: '2.2.7'
+	compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.656'
+	compile group: 'com.amazonaws', name: 'aws-java-sdk-lambda', version: '1.11.656'
+	
+	compile group: 'commons-io', name: 'commons-io', version: '2.6'	
 }
 
 test {
@@ -91,3 +100,13 @@ test {
     }
 }
 */
+
+//para lambda
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources              
+    into('lib') {
+        from configurations.compileClasspath
+    }           
+}
+build.dependsOn buildZip
