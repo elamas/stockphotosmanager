@@ -31,17 +31,17 @@ import stockphotosmanager.StockphotosmanagerApplication;
 import stockphotosmanager.services.PhotoService;
 import stockphotosmanager.services.PhotoServiceImpl;
 
-@Component
+//@Component
 //@Profile("!test")
 //@ComponentScan(basePackages = {"stockphotosmanager.services"
 //}
 //)
-@ComponentScan(basePackages = {"stockphotosmanager"
-}
-//, 
-//excludeFilters={
-//  @ComponentScan.Filter(type=FilterType.ASSIGNABLE_TYPE, value=StockphotosmanagerApplication.class)}
-)
+//@ComponentScan(basePackages = {"stockphotosmanager"
+//}
+////, 
+////excludeFilters={
+////  @ComponentScan.Filter(type=FilterType.ASSIGNABLE_TYPE, value=StockphotosmanagerApplication.class)}
+//)
 //@EnableJpaRepositories("stockphotosmanager.repositories")
 public class UploadHandler implements RequestHandler<S3Event, String> {
 	

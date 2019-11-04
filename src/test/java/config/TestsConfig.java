@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import stockphotosmanager.StockphotosmanagerApplication;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableAutoConfiguration
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.FilterType;
 		  @ComponentScan.Filter(type=FilterType.ASSIGNABLE_TYPE, value=StockphotosmanagerApplication.class)}
 		)
 @EntityScan("stockphotosmanager.models")
+@EnableJpaRepositories("stockphotosmanager.repositories")
 public class TestsConfig {
 
 }

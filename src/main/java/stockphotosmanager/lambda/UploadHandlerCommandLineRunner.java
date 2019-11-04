@@ -18,13 +18,13 @@ import com.amazonaws.services.s3.event.S3EventNotification.S3EventNotificationRe
 
 import stockphotosmanager.services.PhotoService;
 
-@Component
+//@Component
 public class UploadHandlerCommandLineRunner implements CommandLineRunner{
 
-	@Autowired
+	//@Autowired
 	private PhotoService photoService;
 	
-	@Autowired
+	//@Autowired
 	S3EventUtil s3EventUtil;
 	
 	public static void startSpringApplication() {
@@ -71,4 +71,12 @@ public class UploadHandlerCommandLineRunner implements CommandLineRunner{
     	}
 	}
 
+	public void setS3EventUtil(S3EventUtil s3EventUtil) {
+		this.s3EventUtil = s3EventUtil;
+	}
+
+	public void setPhotoService(PhotoService photoService) {
+		this.photoService = photoService;
+	}
+	
 }
