@@ -13,12 +13,14 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import config.TestsConfig;
 import stockphotosmanager.StockphotosmanagerApplication;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = StockphotosmanagerApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = StockphotosmanagerApplication.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = TestsConfig.class)
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 public class PhotoControllerTestWithTestRestTemplate {
 

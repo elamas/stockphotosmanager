@@ -56,11 +56,11 @@ public class UploadHandlerCommandLineRunnerTest {
 	@MockBean
 	private PhotoService photoService;
 	
-	@Autowired
-	private UploadHandlerCommandLineRunner uploadHandlerCommandLineRunner;
-	
-	@MockBean
-	SpringApplication app;
+//	@Autowired
+//	private UploadHandlerCommandLineRunner uploadHandlerCommandLineRunner;
+//	
+//	@MockBean
+//	SpringApplication app;
 	
     @TestConfiguration
 //    @ComponentScan(basePackages = {"stockphotosmanager.services"
@@ -68,10 +68,10 @@ public class UploadHandlerCommandLineRunnerTest {
 //    )
     static class UploadHandlerTestContextConfiguration {
   
-        @Bean
-        public UploadHandlerCommandLineRunner uploadHandlerCommandLineRunner() {
-            return new UploadHandlerCommandLineRunner();
-        }
+//        @Bean
+//        public UploadHandlerCommandLineRunner uploadHandlerCommandLineRunner() {
+//            return new UploadHandlerCommandLineRunner();
+//        }
         
 //        @Bean
 //        public PhotoService photoService() {
@@ -113,7 +113,13 @@ public class UploadHandlerCommandLineRunnerTest {
 		//UploadHandler handler = new UploadHandler();
 		//handler.setS3event(s3event);
 		String[] args = null;
+		
+		UploadHandlerCommandLineRunner uploadHandlerCommandLineRunner = new UploadHandlerCommandLineRunner();
+		uploadHandlerCommandLineRunner.setS3EventUtil(s3EventUtil);
+		uploadHandlerCommandLineRunner.setPhotoService(photoService);
 		uploadHandlerCommandLineRunner.run(args);
+		
+		//uploadHandlerCommandLineRunner.run(args);
 		//handler.setS3event(null);//para dejarlo vacio por si acaso se utilizase el handler en otro metodo de test
 	}
 	
