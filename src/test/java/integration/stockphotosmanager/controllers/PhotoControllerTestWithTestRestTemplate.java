@@ -19,8 +19,8 @@ import stockphotosmanager.StockphotosmanagerApplication;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = StockphotosmanagerApplication.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = TestsConfig.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = StockphotosmanagerApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TestsConfig.class)
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 public class PhotoControllerTestWithTestRestTemplate {
 
