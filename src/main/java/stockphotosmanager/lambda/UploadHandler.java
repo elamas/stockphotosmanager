@@ -60,7 +60,7 @@ public class UploadHandler implements RequestHandler<S3Event, String> {
 //    }
 	
 //	@Autowired
-	SpringApplication app;
+	//SpringApplication app;
 	//MySpringApplication app;
 	
 	S3EventUtil s3EventUtil = new S3EventUtil();
