@@ -17,6 +17,7 @@ import com.amazonaws.services.s3.event.S3EventNotification.S3Entity;
 import com.amazonaws.services.s3.event.S3EventNotification.S3EventNotificationRecord;
 
 import stockphotosmanager.services.PhotoService;
+import stockphotosmanager.services.PhotoServiceImpl;
 
 //@Component
 public class UploadHandlerCommandLineRunner implements CommandLineRunner{
@@ -28,21 +29,32 @@ public class UploadHandlerCommandLineRunner implements CommandLineRunner{
 	S3EventUtil s3EventUtil;
 	
 	public static void startSpringApplication() {
-		SpringApplication app = new SpringApplication(UploadHandler.class);
+		SpringApplication app = new SpringApplication(UploadHandlerCommandLineRunner.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
 		app.run(new String[]{});
 	}
 	
 	@Override
 	public void run(String... args) throws Exception {
-		S3EventNotification s3EventNotification = null;
-		try {
-//			String s3eventJson = FileUtils.readFileToString(new File("/tmp/s3event.txt"), "UTF-8");
-//			s3EventNotification = S3Event.parseJson(s3eventJson);
-			s3EventNotification = s3EventUtil.getS3Event();
-		} catch (Exception e) {
-			e.printStackTrace();
+		//no me molan estas chapuzas, pero bueno
+		if (s3EventUtil == null) {//no es null cuando viene mockeado
+			s3EventUtil = new S3EventUtil();
 		}
+		if (photoService == null) {//no es null cuando viene mockeado
+			photoService = new PhotoServiceImpl();
+		}
+
+		
+		S3EventNotification s3EventNotification = null;
+//		try {
+////			String s3eventJson = FileUtils.readFileToString(new File("/tmp/s3event.txt"), "UTF-8");
+////			s3EventNotification = S3Event.parseJson(s3eventJson);
+//			s3EventNotification = s3EventUtil.getS3Event();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		System.err.println("[UploadHandlerCommandLineRunner - run]s3EventUtil: " + s3EventUtil);
+		s3EventNotification = s3EventUtil.getS3Event();
 
 		
 		//System.err.println("[UploadHandler - run]s3event.getClass(): " + s3event.getClass());
