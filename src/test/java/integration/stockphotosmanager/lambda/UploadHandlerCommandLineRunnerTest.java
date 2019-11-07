@@ -119,14 +119,14 @@ public class UploadHandlerCommandLineRunnerTest {
 		//when(s3event.getRecords()).thenReturn(null);
 		when(s3event.getRecords()).thenReturn(records);
 		
-		when(s3EventUtil.getS3Event()).thenReturn(s3event);
+		when(s3EventUtil.getS3Event(anyString())).thenReturn(s3event);
 		String s3eventJson = new String(Files.readAllBytes(Paths.get(getClass().getResource("/s3event.json").toURI())));
 		when(s3event.toJson()).thenReturn(s3eventJson);
 		//mock end
 		
 		S3EventUtil s3EventUtil = new S3EventUtil();
-		s3EventUtil.saveS3Event(s3event);
-		String[] args = null;
+		String path = s3EventUtil.saveS3Event(s3event);
+		String[] args = new String[] {path};
 		
 		UploadHandlerCommandLineRunner uploadHandlerCommandLineRunner = new UploadHandlerCommandLineRunner();
 		uploadHandlerCommandLineRunner.setS3EventUtil(s3EventUtil);
@@ -162,7 +162,7 @@ public class UploadHandlerCommandLineRunnerTest {
 		//when(s3event.getRecords()).thenReturn(null);
 		when(s3event.getRecords()).thenReturn(records);
 		
-		when(s3EventUtil.getS3Event()).thenReturn(s3event);
+		when(s3EventUtil.getS3Event(anyString())).thenReturn(s3event);
 		
 //		System.err.println("[UploadHandlerCommandLineRunnerTest - startSpringApplicationTest] getClass(): " + getClass());
 //		System.err.println("[UploadHandlerCommandLineRunnerTest - startSpringApplicationTest]getClass().getResource...: " + getClass().getResource("/s3event.json"));
@@ -172,7 +172,7 @@ public class UploadHandlerCommandLineRunnerTest {
 		//mock end
 
 		S3EventUtil s3EventUtil = new S3EventUtil();
-		s3EventUtil.saveS3Event(s3event);		
-		UploadHandlerCommandLineRunner.startSpringApplication();
+		String path = s3EventUtil.saveS3Event(s3event);		
+		UploadHandlerCommandLineRunner.startSpringApplication(path);
 	}
 }

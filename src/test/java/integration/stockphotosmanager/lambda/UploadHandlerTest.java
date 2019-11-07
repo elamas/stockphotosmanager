@@ -18,7 +18,7 @@ import config.TestsConfig;
 import stockphotosmanager.lambda.S3EventUtil;
 import stockphotosmanager.lambda.UploadHandler;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -75,7 +75,7 @@ public class UploadHandlerTest {
 		//when(s3event.getRecords()).thenReturn(null);
 		when(s3event.getRecords()).thenReturn(records);
 		
-		when(s3EventUtil.getS3Event()).thenReturn(s3event);
+		when(s3EventUtil.getS3Event(anyString())).thenReturn(s3event);
 		String s3eventJson = new String(Files.readAllBytes(Paths.get(getClass().getResource("/s3event.json").toURI())));
 		when(s3event.toJson()).thenReturn(s3eventJson);
 		//mock end

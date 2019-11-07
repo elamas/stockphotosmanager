@@ -107,12 +107,12 @@ public class UploadHandlerCommandLineRunnerTest {
 		//when(s3event.getRecords()).thenReturn(null);
 		when(s3event.getRecords()).thenReturn(records);
 		
-		when(s3EventUtil.getS3Event()).thenReturn(s3event);
+		when(s3EventUtil.getS3Event(anyString())).thenReturn(s3event);
 		//mock end
 		
 		//UploadHandler handler = new UploadHandler();
 		//handler.setS3event(s3event);
-		String[] args = null;
+		String[] args = new String[] {"dummypath"};
 		
 		UploadHandlerCommandLineRunner uploadHandlerCommandLineRunner = new UploadHandlerCommandLineRunner();
 		uploadHandlerCommandLineRunner.setS3EventUtil(s3EventUtil);

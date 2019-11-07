@@ -28,14 +28,20 @@ public class UploadHandlerCommandLineRunner implements CommandLineRunner{
 	//@Autowired
 	S3EventUtil s3EventUtil;
 	
-	public static void startSpringApplication() {
+	public static void startSpringApplication(String path) {
 		SpringApplication app = new SpringApplication(UploadHandlerCommandLineRunner.class);
 		app.setWebApplicationType(WebApplicationType.NONE);
-		app.run(new String[]{});
+		app.run(new String[]{path});
 	}
 	
 	@Override
 	public void run(String... args) throws Exception {
+		String path = args[0];
+		if (path == null) {
+			throw new Exception("Empty path");
+		}
+		System.err.println("[UploadHandlerCommandLineRunner - run]path: " + path);
+		
 		//no me molan estas chapuzas, pero bueno
 		if (s3EventUtil == null) {//no es null cuando viene mockeado
 			s3EventUtil = new S3EventUtil();
@@ -54,7 +60,7 @@ public class UploadHandlerCommandLineRunner implements CommandLineRunner{
 //			e.printStackTrace();
 //		}
 		System.err.println("[UploadHandlerCommandLineRunner - run]s3EventUtil: " + s3EventUtil);
-		s3EventNotification = s3EventUtil.getS3Event();
+		s3EventNotification = s3EventUtil.getS3Event(path);
 
 		
 		//System.err.println("[UploadHandler - run]s3event.getClass(): " + s3event.getClass());

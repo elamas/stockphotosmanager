@@ -67,20 +67,25 @@ public class UploadHandler implements RequestHandler<S3Event, String> {
 
 	@Override
 	public String handleRequest(S3Event s3event, Context context) {
-		System.err.println("[UploadHandler - handleRequest] Paso por aqui");		
-//		this.s3event = s3event;
-//		this.context = context;
-		
-		//guardamos en disco el s3event
 		try {
-			//FileUtils.writeStringToFile(new File("/tmp/s3event.txt"), s3event.toJson(), "UTF-8");
-			s3EventUtil.saveS3Event(s3event);
+			System.err.println("[UploadHandler - handleRequest] Paso por aqui");		
+	//		this.s3event = s3event;
+	//		this.context = context;
+			
+			//guardamos en disco el s3event
+	//		try {
+	//			//FileUtils.writeStringToFile(new File("/tmp/s3event.txt"), s3event.toJson(), "UTF-8");
+	//			s3EventUtil.saveS3Event(s3event);
+	//		} catch (Exception e) {
+	//			e.printStackTrace();
+	//		}
+			String path = s3EventUtil.saveS3Event(s3event);
+			
+			UploadHandlerCommandLineRunner.startSpringApplication(path);
+	        return "dummy";
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-		
-		UploadHandlerCommandLineRunner.startSpringApplication();
-        return "dummy";
 	}
 
 	/*
