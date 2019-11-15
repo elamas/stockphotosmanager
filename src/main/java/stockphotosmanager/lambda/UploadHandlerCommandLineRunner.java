@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import com.amazonaws.services.lambda.runtime.events.S3Event;
@@ -20,9 +21,10 @@ import stockphotosmanager.services.PhotoService;
 import stockphotosmanager.services.PhotoServiceImpl;
 
 //@Component
+@ComponentScan(basePackages = {"stockphotosmanager"})
 public class UploadHandlerCommandLineRunner implements CommandLineRunner{
 
-	//@Autowired
+	@Autowired
 	private PhotoService photoService;
 	
 	//@Autowired

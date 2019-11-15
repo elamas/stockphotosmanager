@@ -2,6 +2,8 @@ package stockphotosmanager.util;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -13,9 +15,11 @@ import com.amazonaws.services.rekognition.model.Image;
 import com.amazonaws.services.rekognition.model.Label;
 import com.amazonaws.services.rekognition.model.S3Object;
 
+@Component
 public class KeywordsManager {
 	
 	private AmazonRekognition awsRekognition;
+	
 
 	public KeywordsManager(AmazonRekognition awsRekognition) throws Exception {
 		this.awsRekognition = awsRekognition;
@@ -70,6 +74,10 @@ public class KeywordsManager {
 			
 		}
 		*/
+	}
+	
+	public void trace() {
+		System.err.println("[KeywordsManager - trace] awsRekognition: " + awsRekognition);
 	}
 	
 	/*

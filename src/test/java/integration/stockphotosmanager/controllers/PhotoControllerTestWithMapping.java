@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import config.TestsConfig;
 import stockphotosmanager.StockphotosmanagerApplication;
 import stockphotosmanager.controllers.PhotoController;
 import stockphotosmanager.repositories.PhotoRepository;
@@ -35,6 +36,7 @@ import static org.hamcrest.Matchers.*;
 @RunWith(SpringRunner.class)
 //@WebMvcTest(PhotoController.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = StockphotosmanagerApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK, classes = TestsConfig.class)
 @ContextConfiguration(classes=StockphotosmanagerApplication.class)
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 //@ComponentScan(basePackages = "stockphotosmanager")

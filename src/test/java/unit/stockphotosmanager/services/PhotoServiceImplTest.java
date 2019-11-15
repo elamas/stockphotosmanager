@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import config.TestsConfig;
 import stockphotosmanager.repositories.PhotoRepository;
 import stockphotosmanager.services.PhotoService;
 import stockphotosmanager.services.PhotoServiceImpl;
+import stockphotosmanager.util.KeywordsManager;
+import stockphotosmanager.StockphotosmanagerApplication;
 import stockphotosmanager.models.Photo;
 
 import static org.mockito.Mockito.*;
@@ -21,6 +25,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
+//@ContextConfiguration(classes=TestsConfig.class)
 public class PhotoServiceImplTest {
 	
     @TestConfiguration
@@ -30,6 +35,12 @@ public class PhotoServiceImplTest {
         public PhotoService photoService() {
             return new PhotoServiceImpl();
         }
+        
+//        @Bean
+//        public KeywordsManager keywordsManager() {
+//            return new KeywordsManager();
+//        }
+        
     }
 	
 	@MockBean
@@ -37,6 +48,9 @@ public class PhotoServiceImplTest {
 	
 	@Autowired
 	private PhotoService photoService;
+	
+	@MockBean
+	private KeywordsManager keywordsManager;
 	
 	@Test
 	public void findAllTest() {
@@ -50,6 +64,11 @@ public class PhotoServiceImplTest {
 		
 		List<Photo> photosReturned = photoService.findAll();
 		assertEquals(photos, photosReturned);
+	}
+
+	@Test
+	public void processPhoto() {
+		photoService.processPhoto("elbucketName", "lakeyNormalized");
 	}
 
 }

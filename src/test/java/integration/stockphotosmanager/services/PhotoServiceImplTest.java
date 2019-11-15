@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import config.TestsConfig;
 import stockphotosmanager.StockphotosmanagerApplication;
 import stockphotosmanager.models.Photo;
 import stockphotosmanager.repositories.PhotoRepository;
@@ -31,6 +32,7 @@ import static org.junit.Assert.*;
 //@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE) //necesaria si quiero probar contra mysql
 //@ContextConfiguration(classes=StockphotosmanagerApplication.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = StockphotosmanagerApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = TestsConfig.class)
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 public class PhotoServiceImplTest {
 
@@ -70,4 +72,8 @@ public class PhotoServiceImplTest {
 		assertNotNull(photo.getComments());
 	}
 
+	@Test
+	public void processPhotoTest() {
+		photoService.processPhoto("elbucketName", "lakeyNormalized");
+	}
 }

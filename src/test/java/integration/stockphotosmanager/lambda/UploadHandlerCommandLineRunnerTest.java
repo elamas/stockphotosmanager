@@ -32,6 +32,7 @@ import stockphotosmanager.lambda.UploadHandler;
 import stockphotosmanager.lambda.UploadHandlerCommandLineRunner;
 import stockphotosmanager.services.PhotoService;
 import stockphotosmanager.services.PhotoServiceImpl;
+import stockphotosmanager.util.KeywordsManager;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -44,8 +45,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = StockphotosmanagerApplication.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = TestsConfig.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = StockphotosmanagerApplication.class)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = TestsConfig.class)
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 public class UploadHandlerCommandLineRunnerTest {
 	
@@ -68,12 +69,15 @@ public class UploadHandlerCommandLineRunnerTest {
 	
 	@Autowired
 	private PhotoService photoService;
+//	
+//	@Autowired
+//	private KeywordsManager keywordsManager; 
 	
 //	@Autowired
 //	private UploadHandlerCommandLineRunner uploadHandlerCommandLineRunner;
 	
 	
-    @TestConfiguration
+   @TestConfiguration
 //    @ComponentScan(basePackages = {"stockphotosmanager.services"
 //	}
 //    )
@@ -132,6 +136,14 @@ public class UploadHandlerCommandLineRunnerTest {
 		uploadHandlerCommandLineRunner.setS3EventUtil(s3EventUtil);
 		uploadHandlerCommandLineRunner.setPhotoService(photoService);
 		uploadHandlerCommandLineRunner.run(args);
+	}
+	
+	//@Test
+	public void dummy() {
+		//photoService.processPhoto("lalala", "lelele");
+		PhotoService photoService2 = new PhotoServiceImpl();
+		photoService2.processPhoto("lalala2", "lelele2");
+		
 	}
 	
 	@Test
