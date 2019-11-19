@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.amazonaws.services.rekognition.model.Label;
+
 import config.TestsConfig;
 import stockphotosmanager.repositories.PhotoRepository;
 import stockphotosmanager.services.PhotoService;
@@ -68,6 +70,11 @@ public class PhotoServiceImplTest {
 
 	@Test
 	public void processPhoto() {
+		//mock begin
+		List<Label> labels = new ArrayList<Label>();
+		labels.add(new Label().withName("lalala"));
+		when(keywordsManager.getKeywords()).thenReturn(labels);
+		//mock end
 		photoService.processPhoto("elbucketName", "lakeyNormalized");
 	}
 
