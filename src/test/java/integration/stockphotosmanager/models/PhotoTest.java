@@ -12,8 +12,12 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import stockphotosmanager.StockphotosmanagerApplication;
+import stockphotosmanager.models.Keyword;
 import stockphotosmanager.models.Photo;
 import static org.junit.Assert.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
@@ -75,4 +79,28 @@ public class PhotoTest {
 		
 	}
 	*/
+	
+	@Test
+	public void saveWithKeywords() {
+		Keyword keyword = new Keyword();
+		keyword.setName("lalala");
+		
+		Keyword savedKeyword = this.entityManager.persistAndFlush(keyword);
+		
+		Set<Keyword> keywords = new HashSet<Keyword>();
+		keywords.add(keyword);
+
+		Photo photo = new Photo();
+		photo.setDvd("dvdtest");
+		photo.setComments("commensttest");
+		photo.setFileName("filenametest");
+		photo.setUploadDateMillis(1111);
+		photo.setUploadDateStringMadrid("1111");
+		photo.setKeywords(keywords);
+		
+		Photo savedPhoto = this.entityManager.persistAndFlush(photo);
+		//Photo savedPhoto = this.entityManager.persist(photo);
+		assertEquals(savedPhoto, photo);
+		//assertEquals(savedPhoto.getDvd(), photo.getDvd());
+	}
 }

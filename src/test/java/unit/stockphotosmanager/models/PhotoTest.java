@@ -2,6 +2,7 @@ package unit.stockphotosmanager.models;
 
 import org.junit.Test;
 
+import stockphotosmanager.models.Keyword;
 import stockphotosmanager.models.Photo;
 import stockphotosmanager.models.PhotoSite;
 import stockphotosmanager.models.PhotoSiteKey;
@@ -96,6 +97,19 @@ public class PhotoTest {
 		Photo photo = new Photo();
 		photo.setPhotoSites(photoSites);
 		assertEquals(photoSites, photo.getPhotoSites());
+	}
+	
+	@Test
+	public void keywordsTest() {
+		Photo photo = new Photo();
+		Keyword keyword = new Keyword();
+		keyword.setId(111);
+		keyword.setName("lalala");
+		Set<Keyword> keywords = new HashSet<Keyword>();
+		keywords.add(keyword);
+		
+		photo.setKeywords(keywords);
+		assertEquals(keywords, photo.getKeywords());
 	}
 
 }

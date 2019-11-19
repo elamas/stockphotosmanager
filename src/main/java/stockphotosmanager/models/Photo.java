@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -36,6 +39,13 @@ public class Photo {
 	
     @OneToMany(mappedBy = "photo")//parece que aqui hay que poner una entidad, aunque sea con minusculas, no una tabla
     Set<PhotoSite> photoSites;
+    
+    @ManyToMany
+    @JoinTable(
+    		  name = "photos_keywords", 
+    		  joinColumns = @JoinColumn(name = "pho_id"), 
+    		  inverseJoinColumns = @JoinColumn(name = "key_id"))
+    Set<Keyword> keywords;
 
 	public Integer getId() {
 		return id;
@@ -93,5 +103,12 @@ public class Photo {
 		this.photoSites = photoSites;
 	}
 
+	public Set<Keyword> getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(Set<Keyword> keywords) {
+		this.keywords = keywords;
+	}
 
 }
