@@ -39,10 +39,10 @@ public class KeywordsManagerTest {
 	@Test
 	public void getKeywords() throws Exception {
 		KeywordsManager keywordsManager = new KeywordsManager(awsRekognition);
-		List<Label> labels = keywordsManager.getKeywords();
-		System.err.println("[KeywordsManagerTest - getKeywords]labels: " + labels);
-		assertNotNull(labels);
-		assertTrue(labels.size() > 0);
+		List<String > keywords = keywordsManager.getKeywords("qqtest20190613", "landscape.jpg", 10);
+		System.err.println("[KeywordsManagerTest - getKeywords]keywords: " + keywords);
+		assertNotNull(keywords);
+		assertTrue(keywords.size() > 0);
 
 	}
 }

@@ -71,9 +71,9 @@ public class PhotoServiceImplTest {
 	@Test
 	public void processPhoto() {
 		//mock begin
-		List<Label> labels = new ArrayList<Label>();
-		labels.add(new Label().withName("lalala"));
-		when(keywordsManager.getKeywords()).thenReturn(labels);
+		List<String> keywords = new ArrayList<String>();
+		keywords.add("lalala");
+		when(keywordsManager.getKeywords(anyString(), anyString(), anyInt())).thenReturn(keywords);
 		//mock end
 		photoService.processPhoto("elbucketName", "lakeyNormalized");
 	}

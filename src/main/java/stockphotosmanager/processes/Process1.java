@@ -38,8 +38,8 @@ public class Process1 implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		try {
 			KeywordsManager keywordsManager = new KeywordsManager(getAmazonRekognition());
-			List<Label> labels = keywordsManager.getKeywords();
-			System.err.println("[KeywordsManager - DetectLabels]labels: " + labels);
+			List<String> kewwords = keywordsManager.getKeywords("qqtest20190613", "landscape.jpg", 10);//TODO que el 10 lo pille de properties
+			System.err.println("[KeywordsManager - DetectLabels]kewwords: " + kewwords);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

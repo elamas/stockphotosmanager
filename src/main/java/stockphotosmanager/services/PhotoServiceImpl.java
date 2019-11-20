@@ -37,8 +37,8 @@ public class PhotoServiceImpl implements PhotoService {
 //		keywordsManager.trace();
 //		System.err.println("[PhotoServiceImpl - processPhoto]despues del trace");
 		//llama al KeywordManager para obtener las keywords
-		 List<Label> labels = keywordsManager.getKeywords();
-		 System.err.println("[PhotoServiceImpl - processPhoto]labels: " + labels);
+		 List<String> keywords = keywordsManager.getKeywords(bucketName, keyNormalized, 10);//TODO que el 10 lo pille de properties
+		 System.err.println("[PhotoServiceImpl - processPhoto]keywords: " + keywords);
 		//inserta en bbdd la photo
 		//TODO
 		//genera un thumb
